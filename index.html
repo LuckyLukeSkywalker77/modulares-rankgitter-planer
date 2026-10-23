@@ -1349,19 +1349,43 @@ td:last-child {
   background: #eef0f2;
 }
 .language-toggle button {
-  min-width: 58px;
+  min-width: 62px;
   padding: 7px 9px;
-  border: 1px solid #c2c6cc;
+  border: 1px solid #bfc4ca;
   border-radius: 6px;
-  background: #d9dde2;
-  color: #34383d;
+  background: #d6d9dd;
+  color: #30343a;
   font-weight: 800;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.language-toggle button:hover {
+  background: #c9cdd2;
 }
 .language-toggle button.active {
-  border-color: var(--orange);
-  background: var(--orange);
+  border-color: #f28c28;
+  background: #f28c28;
   color: #fff;
+}
+.language-toggle button.active:hover {
+  background: #f28c28;
+}
+.language-toggle .flag-icon {
+  width: 18px;
+  height: 12px;
+  display: inline-block;
+  flex: 0 0 18px;
+  border: 1px solid rgba(0,0,0,.18);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.language-toggle .flag-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 @media print {
   .language-toggle { display: none !important; }
@@ -1381,7 +1405,14 @@ td:last-child {
           </div>
         </div>
         <div class="header-actions">
-          <div class="language-toggle" aria-label="Language"><button id="langDe" type="button" title="Deutsch">🇩🇪&nbsp; DE</button><button id="langEn" type="button" title="English">🇬🇧&nbsp; EN</button></div>
+          <div class="language-toggle" aria-label="Language">
+            <button id="langDe" type="button" title="Deutsch" aria-pressed="false">
+              <span class="flag-icon" aria-hidden="true"><svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#ffce00"/><rect width="30" height="13.333" y="0" fill="#dd0000"/><rect width="30" height="6.667" y="0" fill="#000"/></svg></span><span>DE</span>
+            </button>
+            <button id="langEn" type="button" title="English" aria-pressed="false">
+              <span class="flag-icon" aria-hidden="true"><svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="30" fill="#012169"/><path d="M0 0L60 30M60 0L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" stroke-width="3"/><path d="M30 0V30M0 15H60" stroke="#fff" stroke-width="10"/><path d="M30 0V30M0 15H60" stroke="#C8102E" stroke-width="6"/></svg></span><span>EN</span>
+            </button>
+          </div>
           <button id="resetBtn" type="button">Alles löschen</button>
         </div>
       </div>
@@ -1725,8 +1756,14 @@ function applyLanguage(lang, recalc=true) {
   document.getElementById("optFrameA").textContent = tr("frameA");
   document.getElementById("optFrameB").textContent = tr("frameB");
   for (let s=1;s<=6;s++) document.getElementById(`frameLabel${s}`).textContent = `${currentLang === "en" ? "Frame" : "Rahmen"} ${s}`;
-  document.getElementById("langDe").classList.toggle("active", currentLang === "de");
-  document.getElementById("langEn").classList.toggle("active", currentLang === "en");
+  const langDeBtn = document.getElementById("langDe");
+  const langEnBtn = document.getElementById("langEn");
+  const deActive = currentLang === "de";
+  const enActive = currentLang === "en";
+  langDeBtn.classList.toggle("active", deActive);
+  langEnBtn.classList.toggle("active", enActive);
+  langDeBtn.setAttribute("aria-pressed", String(deActive));
+  langEnBtn.setAttribute("aria-pressed", String(enActive));
   if (recalc) calculate();
 }
 
