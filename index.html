@@ -1342,23 +1342,24 @@ td:last-child {
 
 .language-toggle {
   display: inline-flex;
-  gap: 3px;
+  gap: 4px;
   padding: 3px;
-  border: 1px solid #d8dbe0;
+  border: 1px solid #c7cbd1;
   border-radius: 8px;
-  background: #f5f6f7;
+  background: #eef0f2;
 }
 .language-toggle button {
-  min-width: 42px;
-  padding: 7px 10px;
-  border: 0;
+  min-width: 58px;
+  padding: 7px 9px;
+  border: 1px solid #c2c6cc;
   border-radius: 6px;
-  background: transparent;
-  color: #5a5f66;
+  background: #d9dde2;
+  color: #34383d;
   font-weight: 800;
   cursor: pointer;
 }
 .language-toggle button.active {
+  border-color: var(--orange);
   background: var(--orange);
   color: #fff;
 }
@@ -1380,7 +1381,7 @@ td:last-child {
           </div>
         </div>
         <div class="header-actions">
-          <div class="language-toggle" aria-label="Language"><button id="langDe" type="button">DE</button><button id="langEn" type="button">EN</button></div>
+          <div class="language-toggle" aria-label="Language"><button id="langDe" type="button" title="Deutsch">🇩🇪&nbsp; DE</button><button id="langEn" type="button" title="English">🇬🇧&nbsp; EN</button></div>
           <button id="resetBtn" type="button">Alles löschen</button>
         </div>
       </div>
